@@ -4,10 +4,27 @@ import mysql.connector as m
 import random
 ex='n'
 #Database connection
-con=m.connect(host='localhost',user='root',password='Di@090103',database='pro')
+con=m.connect(host='localhost',user='root',password='Di@090103')
 c=con.cursor()
 
 #Function defining
+
+def database():
+    c=con.cursor()
+    sql="create database IF NOT EXISTS pro"
+    c.execute(sql)
+    con.commit()
+
+    sql="use pro"
+    c.execute(sql)
+
+    sql="create table IF NOT EXISTS bank(acc_no INT PRIMARY KEY,\
+        name VARCHAR(30),\
+        acc_type VARCHAR(30),\
+        amount INT)"
+    c.execute(sql)
+
+
 #1.New Account
 def new_acc():
                 c=con.cursor()
@@ -99,13 +116,14 @@ def all_acc():
                                 print (I)
 
 #6.Close an account
-def del_():
+def del_acc():
                 ac=int(input('Enter account no. : '))
                 c.execute('delete from bank where acc_no=%s'%(ac))
                 con.commit()
                 print ('\nAccount deleted successfully !\n')
         
 
+database()
 while ex=='n' or ex=='N':
         os.system('clear')
         print ("""\n\n                * * * * * * * * * * * * * * * * * *
@@ -138,9 +156,10 @@ while ex=='n' or ex=='N':
         elif r==5:
                         all_acc()
         elif r==6:
-                        del_()
+                        del_acc()
         elif r==7:
                         exit()
         else :
-                        print ('Try again ! ')
-        ex=input('Exit?(y/n) ')
+                        print ('Try again!')
+        ex=input('Exit?(y/n): ')
+ 
