@@ -4,7 +4,7 @@ import mysql.connector as m
 import random
 ex='n'
 #Database connection
-con=m.connect(host='localhost',user='root',password='Di@090103')
+con=m.connect(host='localhost',user='root',password = '<password>')
 c=con.cursor()
 
 #Function defining
